@@ -33,7 +33,6 @@
 #import "OrderedDictionary.h"
 #import "MGCReusableObjectQueue.h"
 #import "MGCMonthPlannerViewLayout.h"
-#import "MGCMonthPlannerViewDayCell.h"
 #import "MGCMonthPlannerBackgroundView.h"
 #import "MGCMonthPlannerWeekView.h"
 #import "MGCEventsRowView.h"
