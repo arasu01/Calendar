@@ -89,8 +89,9 @@ static CGFloat kSpace = 2;
 		[as appendAttributedString:detail];
 	}
 	
-	NSTextTab *t = [[NSTextTab alloc]initWithTextAlignment:NSTextAlignmentRight location:rect.size.width options:[[NSDictionary alloc] init]];
+	NSTextTab *t = [[NSTextTab alloc]initWithTextAlignment:NSTextAlignmentCenter location:rect.size.width options:[[NSDictionary alloc] init]];
 	NSMutableParagraphStyle *style = [NSMutableParagraphStyle new];
+    style.alignment = NSTextAlignmentCenter;
 	style.tabStops = @[t];
 	//style.hyphenationFactor = .4;
 	//style.lineBreakMode = NSLineBreakByTruncatingMiddle;
@@ -170,7 +171,10 @@ static CGFloat kSpace = 2;
 	
 	if (boundingRect.size.height > drawRect.size.height) {
 		[self.attrString.mutableString replaceOccurrencesOfString:@"\n" withString:@"  " options:NSCaseInsensitiveSearch range:NSMakeRange(0, self.attrString.length)];
-	}
+    } else { // Adjust the Y axis so it may be horizontally center aligned inside the view.
+        CGFloat diff = drawRect.size.height - boundingRect.size.height;
+        drawRect.origin.y += fabs(diff / 2);
+    }
 
 	[self.attrString drawWithRect:drawRect options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin context:nil];
 }
